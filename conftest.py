@@ -19,19 +19,8 @@ def driver(request):
     browser.quit()
 
 @pytest.fixture
-def driver_authorisation_page():
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
+def driver_authorisation_page(driver):
     driver.get(Urls.URL_AUTHORISATION_PAGE)
-    yield driver
-    driver.quit()
-
-
-@pytest.fixture
-def driver_registration_page():
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
-    driver.get(Urls.URL_REGISTRATION_PAGE)
     yield driver
     driver.quit()
 
