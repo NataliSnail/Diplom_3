@@ -9,21 +9,8 @@ import allure
 
 
 class PersonalAccount(BasePage):
-    """Методы заполнения полей"""
-
-    @allure.step("Авторизация пользователя")
-    def login_authorization(self):
-        self.click_on_element(MainLocators.PERSONAL_ACCOUNT)
-        self.send_keys(AuthorizationLocators.EMAIL_FIELD, Constants.TEST_EMAIL)
-        self.send_keys(AuthorizationLocators.PASSWORD_FIELD, Constants.PASSWORD)
-        self.click_on_element(AuthorizationLocators.SUBMIT_BUTTON)
-
 
     """Методы кнопок"""
-    @allure.step("Нажать на хедер Личный кабинет")
-    def click_to_personal_account(self):
-        self.click_on_element(MainLocators.PERSONAL_ACCOUNT)
-
 
     @allure.step("Нажать на раздел История заказов")
     def click_to_history_orders(self):
@@ -38,17 +25,14 @@ class PersonalAccount(BasePage):
     @allure.step("Проверить переход на страницу авторизации")
     def check_authorization_page(self):
         actual_url = Urls.URL_AUTHORISATION_PAGE
-        expected_url = 'https://stellarburgers.nomoreparties.site/login'
+        expected_url = Urls.URL_AUTHORISATION_PAGE
         assert actual_url == expected_url
 
-    @allure.step("Проверить переход на главную страницу")
-    def check_main_page(self):
-        assert self.wait_visibility_of_element_located(MainLocators.COLLECT_TO_BURGER)
 
     @allure.step("Проверить переход на страницу История заказов")
     def check_to_history_orders(self):
         actual_url = Urls.URL_HISTORY_ORDER
-        expected_url = 'https://stellarburgers.nomoreparties.site/account/order-history'
+        expected_url = Urls.URL_HISTORY_ORDER
         assert actual_url == expected_url
 
     @allure.step("Проверить переход на страницу Личного кабинета")
