@@ -1,3 +1,4 @@
+
 from diplom_3.locators.main_page_locators import MainLocators
 from diplom_3.locators.personal_account_page_locators import PersonalAccountLocators
 from diplom_3.pages.base_page import BasePage
@@ -14,15 +15,15 @@ class MainPage(BasePage):
     @allure.step("Авторизация пользователя")
     def login_authorization(self):
         self.click_on_element(MainLocators.PERSONAL_ACCOUNT)
-        self.send_keys(AuthorizationLocators.EMAIL_FIELD, Constants.TEST_EMAIL)
-        self.send_keys(AuthorizationLocators.PASSWORD_FIELD, Constants.PASSWORD)
-        self.click_on_element(AuthorizationLocators.SUBMIT_BUTTON)
+        self.send_keys(MainLocators.EMAIL_FIELD, Constants.TEST_EMAIL)
+        self.send_keys(MainLocators.PASSWORD_FIELD, Constants.PASSWORD)
+        self.click_on_element(MainLocators.SUBMIT_BUTTON)
 
     """ Методы кнопок"""
-    @allure.step("Нажать на кнопку 'Показать пароль'")
+    @allure.step("Нажать на хедер 'Личный кабинет'")
     def click_to_personal_account(self):
         self.click_on_element(MainLocators.PERSONAL_ACCOUNT)
-        assert self.find_element(PersonalAccountLocators.PROFILE)
+
 
     @allure.step("Нажать на хедер 'Конструктор'")
     def click_to_button_constructor(self):
@@ -82,9 +83,6 @@ class MainPage(BasePage):
         elements_text = [element.text for element in all_elements]
         assert 'Калории,ккал\n643' and 'Белки, г\n85' in elements_text
 
-    @allure.step("Проверить переход на страницу 'Лента заказов'")
-    def check_order_feed_page(self):
-        assert self.wait_visibility_of_element_located(MainLocators.ORDER_FEED_TEXT)
 
     @allure.step("Проверить переход на главную страницу")
     def check_main_page(self):
