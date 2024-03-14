@@ -10,13 +10,6 @@ import allure
 class AuthorizationPage(BasePage):
     """Методы заполнения полей"""
 
-    @allure.step("Авторизация пользователя")
-    def login_authorization(self):
-        self.click_on_element(MainLocators.PERSONAL_ACCOUNT)
-        self.send_keys(AuthorizationLocators.EMAIL_FIELD, Constants.TEST_EMAIL)
-        self.send_keys(AuthorizationLocators.PASSWORD_FIELD, Constants.PASSWORD)
-        self.click_on_element(AuthorizationLocators.SUBMIT_BUTTON)
-
     @allure.step("Заполнить емаил для восстановления пароля")
     def fill_email_in_recovery_field(self):
         self.send_keys(AuthorizationLocators.EMAIL_FIELD,Constants.TEST_EMAIL)
@@ -31,13 +24,13 @@ class AuthorizationPage(BasePage):
     @allure.step("Проверить страницу Забыли пароль")
     def check_recovery_page(self):
         actual_url = Urls.URL_FORGOT_PASSWORD
-        expected_url = 'https://stellarburgers.nomoreparties.site/forgot-password'
+        expected_url = Urls.URL_FORGOT_PASSWORD
         assert actual_url == expected_url
 
     @allure.step("Проверить страницу Восстановления пароля")
     def check_recovery_password_page(self):
         actual_url = Urls.URL_RECOVERY_PASSWORD
-        expected_url = 'https://stellarburgers.nomoreparties.site/reset-password'
+        expected_url = Urls.URL_RECOVERY_PASSWORD
         assert actual_url == expected_url
 
     @allure.step("Проверить элемент 'показать пароль'")
@@ -60,3 +53,4 @@ class AuthorizationPage(BasePage):
     @allure.step("Нажать на кнопку 'Восстановить пароль'")
     def click_recovery_button(self):
         self.click_on_element(AuthorizationLocators.RECOVERY_BUTTON)
+
