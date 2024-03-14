@@ -10,7 +10,7 @@ class BasePage:
 
 
     def open_to_site(self):
-         self.driver.get(self.url)
+        self.driver.get(self.url)
 
 
     def find_element(self, locator, time=10):
@@ -28,9 +28,8 @@ class BasePage:
                                                       message=f'Element not found in {locator}')
 
 
-    def click_on_element(self, locator, time=10):
-        return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
-                                                      message=f'Element not found in {locator}').click()
+    def click_on_element(self,locator):
+        self.driver.find_element(*locator).click()
 
 
     def send_keys(self, locator, value):
@@ -65,3 +64,7 @@ class BasePage:
 
     def wait_for_text_to_be_present_in_element(self, locator, text):
         WebDriverWait(self.driver, 40).until(EC.text_to_be_present_in_element(locator, text))
+
+
+    def wait_timeout_page(self):
+        self.driver.set_page_load_timeout(60)
