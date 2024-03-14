@@ -1,3 +1,5 @@
+import time
+
 from diplom_3.locators.main_page_locators import MainLocators
 from diplom_3.locators.order_feed_locators import OrderFeedLocators
 from diplom_3.pages.base_page import BasePage
@@ -9,28 +11,8 @@ import allure
 
 
 class OrderFeedPage(BasePage):
-    """Методы заполнения полей"""
-
-    @allure.step("Авторизация пользователя")
-    def login_authorization(self):
-        self.click_on_element(MainLocators.PERSONAL_ACCOUNT)
-        self.send_keys(AuthorizationLocators.EMAIL_FIELD, Constants.TEST_EMAIL)
-        self.send_keys(AuthorizationLocators.PASSWORD_FIELD, Constants.PASSWORD)
-        self.click_on_element(AuthorizationLocators.SUBMIT_BUTTON)
-        assert self.wait_visibility_of_element_located(MainLocators.COLLECT_TO_BURGER)
-
 
     """Методы кнопок"""
-
-    @allure.step("Нажать на хедер 'Лента Заказа'")
-    def click_to_order_feed_section(self):
-        self.click_on_element(MainLocators.ORDER_FEED_SECTION)
-
-
-    @allure.step('Нажать на хедер «Конструктор»')
-    def click_to_button_constructor(self):
-        self.click_on_element(MainLocators.CONSTRUCTOR)
-
 
     @allure.step('Нажать на заказ')
     def click_to_order(self):
@@ -39,16 +21,13 @@ class OrderFeedPage(BasePage):
 
     @allure.step('Нажать на крестик закрыть окно заказа')
     def click_close_window_orders(self):
-        self.click_on_element(MainLocators.BUTTON_CLOSE_WINDOW_INGREDIENTS_DETAILS)
+        self.click_on_element(OrderFeedLocators.BUTTON_CLOSE_WINDOW_ORDERS_DETAILS)
 
     """Методы проверки элементов страницы"""
     @allure.step("Проверить номер заказа в окне заказа")
     def check_window_order_id(self):
-        assert self.wait_visibility_of_element_located(MainLocators.ORDER_NUMBER)
+        assert self.wait_visibility_of_element_located(OrderFeedLocators.ORDER_NUMBER)
 
-    @allure.step("Проверить переход на главную страницу")
-    def check_main_page(self):
-        assert self.wait_visibility_of_element_located(MainLocators.COLLECT_TO_BURGER)
 
     @allure.step("Проверить переход на страницу 'Лента заказов'")
     def check_order_feed_page(self):
@@ -69,7 +48,9 @@ class OrderFeedPage(BasePage):
 
     @allure.step('Получение номера заказа')
     def get_user_number_order(self):
-       return self.get_actually_text(MainLocators.ORDER_NUMBER)
+        time.sleep(1)
+        return self.get_actually_text(OrderFeedLocators.ORDER_NUMBER)
+
 
     @allure.step('Получение номера заказа в списке "Готовы"')
     def get_user_order_in_ready(self):
@@ -81,13 +62,8 @@ class OrderFeedPage(BasePage):
     """Метод создания новго заказа"""
     @allure.step('Создание нового заказа')
     def create_order(self):
-        self.drag_and_drop_on_element(MainLocators.BUN_FLUORESCENT_ROLL_R2_D3, MainLocators.CART_BURGER_CONSTRUCTOR)
-        self.drag_and_drop_on_element(MainLocators.SAUCE_SPICY_X,MainLocators.CART_BURGER_CONSTRUCTOR)
-        self.drag_and_drop_on_element(MainLocators.FILLING_MEAT_OF_IMMORTAL_MOLLUSKS_PROTOSTOMIA,MainLocators.CART_BURGER_CONSTRUCTOR)
-        self.click_on_element(MainLocators.BUTTON_MAKE_ORDER)
-
-
-
-
-
+        self.drag_and_drop_on_element(OrderFeedLocators.BUN_FLUORESCENT_ROLL_R2_D3, OrderFeedLocators.CART_BURGER_CONSTRUCTOR)
+        self.drag_and_drop_on_element(OrderFeedLocators.SAUCE_SPICY_X,OrderFeedLocators.CART_BURGER_CONSTRUCTOR)
+        self.drag_and_drop_on_element(OrderFeedLocators.FILLING_MEAT_OF_IMMORTAL_MOLLUSKS_PROTOSTOMIA,OrderFeedLocators.CART_BURGER_CONSTRUCTOR)
+        self.click_on_element(OrderFeedLocators.BUTTON_MAKE_ORDER)
 
