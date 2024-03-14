@@ -1,5 +1,6 @@
 from diplom_3.pages.main_page import MainPage
 from diplom_3.constants import Urls
+from diplom_3.pages.order_feed_page import OrderFeedPage
 import allure
 
 
@@ -21,7 +22,9 @@ class TestMain:
         order_feed = MainPage(driver,Urls.URL)
         order_feed.login_authorization()
         order_feed.click_to_order_feed_section()
-        order_feed.check_order_feed_page()
+
+        order = OrderFeedPage(driver,Urls.URL)
+        order.check_order_feed_page()
 
     @allure.title("Проверить открытие pop-up при клике на ингредиент")
     @allure.description('Клик на ингредиент> проверить открытие всплывающего окна с информацией о ингредиенте')
@@ -52,5 +55,3 @@ class TestMain:
         user.add_ingredient_name_fillings()
         user.click_button_make_order()
         user.check_new_order()
-
-
