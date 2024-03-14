@@ -30,5 +30,3 @@ class TestAuthorizationPage:
         recovery_password.fill_recovery_password()
         recovery_password.click_button_show_hide_password()
         recovery_password.check_value_show_password()
-
-
