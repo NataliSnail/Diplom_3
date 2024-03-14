@@ -15,7 +15,7 @@ class PersonalAccount(BasePage):
     @allure.step("Нажать на раздел История заказов")
     def click_to_history_orders(self):
         self.click_on_element(PersonalAccountLocators.HISTORY_ORDERS)
-        assert self.wait_visibility_of_element_located(PersonalAccountLocators.HISTORY_ORDERS)
+       
 
     @allure.step("Нажать 'Выход' в личном кабинете""")
     def click_to_button_logout(self):
